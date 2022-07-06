@@ -1,4 +1,4 @@
-In order to run the server side of the project for the first time run inside directory hw2 the following :
+In order to run the server side of the project for the first time run inside directory `sproutt` the following :
 ### `npm install && npm start`
 
 In order to run the client side of the project for the first time open another terminal window and
