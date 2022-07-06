@@ -74,29 +74,18 @@ const App = () => {
             </form>
 
             {formState.price && formState.healthClass &&
-            <div className="d-flex flex-column justify-content-around" style={{marginLeft: '4%', marginTop: '5%'}}>
-                <h1>
-                    result :
-                </h1>
+            <div className="d-flex flex-column ">
+                <h1>result:</h1>
                 <div>
-                    {'{'}
+                    {JSON.stringify({
+                        price: (parseFloat(formState.price)).toFixed(3),
+                        healthClass: formState.healthClass,
+                        term: formState.term,
+                        coverage: formState.coverage
+                    })}
                 </div>
-                <div>
-                    price: {formState.price}
-                </div>
-                <div>
-                    health-class: {formState.healthClass}
-                </div>
-                <div>
-                    term: {formState.term}
-                </div>
-                <div>
-                    coverage: {formState.coverage}
-                </div>
-                <div>
-                    {'}'}
-                </div>
-            </div>}
+            </div>
+           }
         </div>
 
     );

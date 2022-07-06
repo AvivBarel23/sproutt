@@ -19,20 +19,22 @@ const rates_table = {"100-249": {}, "250-499": {}, "500-999": {}}
 const rates_table_dictionary = Object.keys(rates_table_json[0]).map((key) => rates_table_json[0][key])
 const rates_table_array = Object.values(rates_table_json).slice(1)
 
-const set_health_class = (coverage, r_l, list) => {
-    rates_table[coverage][r_l] = {}
+const set_health_class = (coverage, key, list) => {
+    rates_table[coverage][key] = {}
     for (let i = 0; i < 4; i++) {
-        rates_table[coverage][r_l][rates_table_dictionary[i + 2]] = list[i]
+        rates_table[coverage][key][rates_table_dictionary[i + 2]] = list[i]
     }
 }
-const set_health_class_for_three = (name, r1, r2, r3) => {
-    set_health_class("100-249", name, r1);
-    set_health_class("250-499", name, r2);
-    set_health_class("500-999", name, r3)
+const set_health_classes = (key, r1, r2, r3) => {
+    set_health_class("100-249", key, r1);
+    set_health_class("250-499", key, r2);
+    set_health_class("500-999", key, r3)
 }
 
-rates_table_array.map(row => Object.keys(row)
-    .map((key) => row[key])).map(row => set_health_class_for_three(row[0] + "," + row[1], row.slice(2, 6), row.slice(6, 10), row.slice(10)))
+rates_table_array
+    .map(row => Object.keys(row)
+        .map((key) => row[key]))
+    .map(row => set_health_classes(row[0] + "," + row[1], row.slice(2, 6), row.slice(6, 10), row.slice(10)))
 
 const getHealthClass = (height, weight) => {
     const height_list = height.split(" ")
