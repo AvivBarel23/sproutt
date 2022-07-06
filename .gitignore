@@ -1,0 +1,11 @@
+/server/node_modules/
+/client/node_modules/
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+/.idea/modules.xml
+/.idea/sproutt.iml
+/.idea/vcs.xml
+/.idea/workspace.xml
