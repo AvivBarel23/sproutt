@@ -1,27 +1,30 @@
 const PORT = 8080;
 const express = require("express");
 const app = express();
-const calculations=require('./calculations')
+const morgan = require('morgan');
+const calculationsRoutes = require('./api/routes/calculationsRoutes')
 
-app.get("/calc", (req, res) => {
-    const term = req.query.term
-    const coverage = req.query.coverage
-    const age = req.query.age
-    const height = req.query.height
-    const weight = req.query.weight
 
-    const healthClass = calculations.getHealthClass(height, weight)
-    const factor = calculations.getFactor(healthClass, coverage, term, age)
-    const price = coverage / 1000 * factor
+app.use(morgan('dev'));
 
-    res.send({
-        price:price.toString(),
-        healthClass:healthClass,
-        term:term,
-        coverage:coverage
+app.use("/calc", calculationsRoutes);
+
+
+app.use((req, res, next) => {
+    const error = new Error('Not Found');
+    error.status = 404;
+    next(error)
+});
+
+app.use((error, req, res) => {
+    res.status(error.status || 500);
+    res.json({
+        error: {
+            message: error.message
+        }
     })
 });
 
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
-app.listen(PORT,()=> console.log(`Server started on port ${PORT}`));
-
+module.exports = app
