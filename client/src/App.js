@@ -13,19 +13,19 @@ const App = () => {
         price: '',
         healthClass: '',
     }
-    const [hasSubmitted, setHasSubmitted] = useState(false)
+    const [wasSubmitted, setWasSubmitted] = useState(false)
     const [formState, setFormState] = useState(initialState)
     const onChange = (event) => {
-        if (hasSubmitted) {
+        if (wasSubmitted) {
             setFormState(initialState)
         }
-        setHasSubmitted(false)
+        setWasSubmitted(false)
         const {id, value} = event.target
         setFormState(prev => ({...prev, [id]: value}))
     }
 
     const onSubmit = event => {
-        setHasSubmitted(true)
+        setWasSubmitted(true)
         event.preventDefault();
         const {term, coverage, age, height, weight} = formState;
         axios.get(`/calc`, {
