@@ -13,22 +13,22 @@ const App = () => {
         price: '',
         healthClass: '',
     }
-    const [hasSubmitted, setHasSubmitted] = useState(false)
+    const [wasSubmitted, setWasSubmitted] = useState(false)
     const [formState, setFormState] = useState(initialState)
     const onChange = (event) => {
-        if (hasSubmitted) {
+        if (wasSubmitted) {
             setFormState(initialState)
         }
-        setHasSubmitted(false)
+        setWasSubmitted(false)
         const {id, value} = event.target
         setFormState(prev => ({...prev, [id]: value}))
     }
 
     const onSubmit = event => {
-        setHasSubmitted(true)
+        setWasSubmitted(true)
         event.preventDefault();
         const {term, coverage, age, height, weight} = formState;
-        axios.get(`/calc`, {
+        axios.get(`/quote`, {
             params: {
                 term, coverage, age, height, weight
             }
@@ -42,7 +42,7 @@ const App = () => {
     }
     return (
         <div>
-            <h1 className=" d-flex flex-row justify-content-around">Sproutt Home Assignment </h1>
+            <h1 className=" d-flex flex-row justify-content-around" style={{marginTop:'5%'}}>Sproutt Home Assignment </h1>
             <form className="mt-5 d-flex flex-row justify-content-around" onSubmit={onSubmit}>
 
                 <label>
@@ -74,8 +74,8 @@ const App = () => {
             </form>
 
             {formState.price && formState.healthClass &&
-            <div className="d-flex flex-column ">
-                <h1>result:</h1>
+            <div className="d-flex flex-column " style={{marginTop:'5%',marginLeft:'2%'}}>
+                <h3>result:</h3>
                 <div>
                     {JSON.stringify({
                         price: (parseFloat(formState.price)).toFixed(3),
