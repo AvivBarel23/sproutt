@@ -28,7 +28,7 @@ const App = () => {
         setWasSubmitted(true)
         event.preventDefault();
         const {term, coverage, age, height, weight} = formState;
-        axios.get(`/calc`, {
+        axios.get(`/quote`, {
             params: {
                 term, coverage, age, height, weight
             }
