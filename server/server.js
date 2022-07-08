@@ -2,12 +2,12 @@ const PORT = 8080;
 const express = require("express");
 const app = express();
 const morgan = require('morgan');
-const calculationsRoutes = require('./api/routes/quotes')
+const quotes = require('./api/routes/quotes')
 
 
 app.use(morgan('dev'));
 
-app.use("/quote", calculationsRoutes);
+app.use("/quote", quotes);
 
 
 app.use((req, res, next) => {
