@@ -7,7 +7,7 @@ const calculationsRoutes = require('./api/routes/quotes')
 
 app.use(morgan('dev'));
 
-app.use("/calc", calculationsRoutes);
+app.use("/quote", calculationsRoutes);
 
 
 app.use((req, res, next) => {
